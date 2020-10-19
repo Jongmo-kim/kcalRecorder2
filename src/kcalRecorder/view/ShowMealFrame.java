@@ -88,10 +88,10 @@ public class ShowMealFrame extends JFrame{
 		}
 		public void makeUI(){
 			Font font = new Font("JetBrains Mono", Font.BOLD, 13);
-			JLabel showMainLabel =new JLabel("¸ÔÀº À½½Äµé");
+			JLabel showMainLabel =new JLabel("ë¨¹ì€ ìŒì‹ë“¤");
 			foodListTextArea = new JTextArea();
 			foodTextAreaWithScroll = new JScrollPane(foodListTextArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			showMealConfirmButton = new showMealConfirmButton("È®ÀÎ");
+			showMealConfirmButton = new showMealConfirmButton("í™•ì¸");
 			
 			foodListTextArea.setEditable(false);
 			showMainLabel.setBounds(50, 10, 230, 50);
@@ -114,7 +114,7 @@ public class ShowMealFrame extends JFrame{
 	public void updateFoodListTextArea(ArrayList<Meal> list) {
 		StringBuilder sb = new StringBuilder();
 		Iterator<Meal> iter = list.iterator();
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY³âMM¿ùddÀÏ hh:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYYë…„MMì›”ddì¼ hh:mm");
 		foodListTextArea.setText("");
 		while(iter.hasNext()) {
 			Meal meal = iter.next();
@@ -124,24 +124,24 @@ public class ShowMealFrame extends JFrame{
 			sb.append(sdf.format(date));
 			sb.append('\n');
 			for(Food f : foods) {
-				sb.append("À½½Ä ÀÌ¸§ :");
+				sb.append("ìŒì‹ ì´ë¦„ :");
 				sb.append(f.getName());
 				sb.append('\n');
 				
-				sb.append("À½½Ä 1ÀÎºĞ ´ç Ä®·Î¸®:");
+				sb.append("ìŒì‹ 1ì¸ë¶„ ë‹¹ ì¹¼ë¡œë¦¬:");
 				sb.append(f.getKcalPerOneHundred());
 				sb.append('\n');
 				
-				sb.append("¸î ÀÎºĞ:");
+				sb.append("ëª‡ ì¸ë¶„:");
 				sb.append(f.getSize());
 				sb.append('\n');
-				sb.append("ÇØ´ç À½½Ä¿¡ ¸ÔÀº Ä®·Î¸® :");
+				sb.append("í•´ë‹¹ ìŒì‹ì— ë¨¹ì€ ì¹¼ë¡œë¦¬ :");
 				sb.append(f.getTotalKcal());
 				sb.append('\n');
 				sb.append('\n');
 				totalKcal += f.getTotalKcal();
 			}
-			sb.append(String.format("ÀÌ ³¢¿¡ ¸ÔÀº Ä®·Î¸® :%d\n\n", totalKcal));
+			sb.append(String.format("ì´ ë¼ì— ë¨¹ì€ ì¹¼ë¡œë¦¬ :%d\n\n", totalKcal));
 		}
 		
 		foodListTextArea.setText(sb.toString());
@@ -150,7 +150,7 @@ public class ShowMealFrame extends JFrame{
 	public void updateFoodListTextArea() {
 		StringBuilder sb = new StringBuilder();
 		Iterator<Meal> iter = mealList.iterator();
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY³âMM¿ùddÀÏ hh:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYYë…„MMì›”ddì¼ hh:mm");
 	
 		while(iter.hasNext()) {
 			Meal meal = iter.next();
@@ -160,24 +160,24 @@ public class ShowMealFrame extends JFrame{
 			sb.append(sdf.format(date));
 			sb.append('\n');
 			for(Food f : foods) {
-				sb.append("À½½Ä ÀÌ¸§ :");
+				sb.append("ìŒì‹ ì´ë¦„ :");
 				sb.append(f.getName());
 				sb.append('\n');
 				
-				sb.append("À½½Ä 1ÀÎºĞ ´ç Ä®·Î¸®:");
+				sb.append("ìŒì‹ 1ì¸ë¶„ ë‹¹ ì¹¼ë¡œë¦¬:");
 				sb.append(f.getKcalPerOneHundred());
 				sb.append('\n');
 				
-				sb.append("¸î ÀÎºĞ:");
+				sb.append("ëª‡ ì¸ë¶„:");
 				sb.append(f.getSize());
 				sb.append('\n');
-				sb.append("ÇØ´ç À½½Ä¿¡ ¸ÔÀº Ä®·Î¸® :");
+				sb.append("í•´ë‹¹ ìŒì‹ì— ë¨¹ì€ ì¹¼ë¡œë¦¬ :");
 				sb.append(f.getTotalKcal());
 				sb.append('\n');
 				sb.append('\n');
 				totalKcal += f.getTotalKcal();
 			}
-			sb.append(String.format("ÀÌ ³¢¿¡ ¸ÔÀº Ä®·Î¸® :%d\n\n", totalKcal));
+			sb.append(String.format("ì´ ë¼ì— ë¨¹ì€ ì¹¼ë¡œë¦¬ :%d\n\n", totalKcal));
 		}
 		
 		foodListTextArea.setText(sb.toString());
@@ -192,21 +192,21 @@ public class ShowMealFrame extends JFrame{
 		public showFoodSubPanel() {
 			super();
 			setLayout(null);
-			JLabel title = new JLabel("°Ë»öÇÏ±â");
+			JLabel title = new JLabel("ê²€ìƒ‰í•˜ê¸°");
 			title.setBounds(30, 10, 280, 30);
 			title.setHorizontalAlignment(JLabel.CENTER);
 			title.setBorder(BorderFactory.createEtchedBorder());
 			add(title);
 			
-			JLabel nameSearchTitle = new JLabel("* ÀÌ¸§À¸·Î À½½Ä °Ë»öÇÏ±â");
-			nameSearchButton = new JButton("°Ë»ö");
+			JLabel nameSearchTitle = new JLabel("* ì´ë¦„ìœ¼ë¡œ ìŒì‹ ê²€ìƒ‰í•˜ê¸°");
+			nameSearchButton = new JButton("ê²€ìƒ‰");
 			nameSearchTitle.setBounds(30, 80, 280, 20);
 			nameSearchTextField = new JTextField(10);
 			nameSearchTextField.setBounds(30, 100, 220, 30);
 			nameSearchButton.setBounds(260, 80, 60, 50);
 			
-			JLabel consonantSearchTitle = new JLabel("* ÃÊ¼ºÀ¸·Î À½½Ä °Ë»öÇÏ±â");
-			consonantSearchButton = new JButton("°Ë»ö");
+			JLabel consonantSearchTitle = new JLabel("* ì´ˆì„±ìœ¼ë¡œ ìŒì‹ ê²€ìƒ‰í•˜ê¸°");
+			consonantSearchButton = new JButton("ê²€ìƒ‰");
 			consonantSearchTitle.setBounds(30, 170, 280, 20);
 			consonantSearchTextField = new JTextField(10);
 			consonantSearchTextField.setBounds(30, 190, 220, 30);
@@ -235,11 +235,11 @@ public class ShowMealFrame extends JFrame{
 			yearTextField = new JTextField(2);
 			monthTextField = new JTextField(2);
 			dayTextField = new JTextField(2);
-			JLabel yearTextLabel = new JLabel("³â");
-			JLabel monthTextLabel = new JLabel("¿ù");
-			JLabel dayTextLabel = new JLabel("ÀÏ");
-			JLabel titleLabel = new JLabel("* ³¯Â¥·Î °Ë»öÇÏ±â");
-			dateSearchButton = new JButton("°Ë»ö");
+			JLabel yearTextLabel = new JLabel("ë…„");
+			JLabel monthTextLabel = new JLabel("ì›”");
+			JLabel dayTextLabel = new JLabel("ì¼");
+			JLabel titleLabel = new JLabel("* ë‚ ì§œë¡œ ê²€ìƒ‰í•˜ê¸°");
+			dateSearchButton = new JButton("ê²€ìƒ‰");
 			titleLabel.setBounds(0, 5, 200, 20);
 			yearTextField.setBounds(0, 30, 20, 20);
 			yearTextLabel.setBounds(20, 30, 20, 20);

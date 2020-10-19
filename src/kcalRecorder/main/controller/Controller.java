@@ -61,11 +61,11 @@ public class Controller {
 		ArrayList<Food> list = new ArrayList<Food>();
 		Calendar calendar = Calendar.getInstance();
 
-		list.add(new Food(500, 1, "Á¦À°ººÀ½"));
-		list.add(new Food(200, 1, "¼Ò½ÃÁö ¾ßÃ¤ººÀ½"));
-		list.add(new Food(300, 1, "°ø±â¹ä"));
-		list.add(new Food(250, 1, "¼Ò°í±â ¹«±¹"));
-		list.add(new Food(100, 1, "¹Ì¿ªÁÙ±â ººÀ½"));
+		list.add(new Food(500, 1, "ì œìœ¡ë³¶ìŒ"));
+		list.add(new Food(200, 1, "ì†Œì‹œì§€ ì•¼ì±„ë³¶ìŒ"));
+		list.add(new Food(300, 1, "ê³µê¸°ë°¥"));
+		list.add(new Food(250, 1, "ì†Œê³ ê¸° ë¬´êµ­"));
+		list.add(new Food(100, 1, "ë¯¸ì—­ì¤„ê¸° ë³¶ìŒ"));
 		Meal temp = new Meal(list);
 		Date date1 = new Date();
 		temp.setDate(date1);
@@ -73,11 +73,11 @@ public class Controller {
 
 		list.clear();
 
-		list.add(new Food(650, 1, "µ·±î½º"));
-		list.add(new Food(200, 1, "¸¶Ä«·Î´Ï »ø·¯µå"));
-		list.add(new Food(150, 0.5, "°ø±â¹ä"));
-		list.add(new Food(250, 1, "Ä«·¹"));
-		list.add(new Food(200, 1, "Äá³ª¹° ¹«Ä§"));
+		list.add(new Food(650, 1, "ëˆê¹ŒìŠ¤"));
+		list.add(new Food(200, 1, "ë§ˆì¹´ë¡œë‹ˆ ìƒëŸ¬ë“œ"));
+		list.add(new Food(150, 0.5, "ê³µê¸°ë°¥"));
+		list.add(new Food(250, 1, "ì¹´ë ˆ"));
+		list.add(new Food(200, 1, "ì½©ë‚˜ë¬¼ ë¬´ì¹¨"));
 		temp = new Meal(list);
 
 		calendar.set(Calendar.YEAR, 2019);
@@ -89,11 +89,11 @@ public class Controller {
 		mealArr.add(temp);
 
 		list.clear();
-		list.add(new Food(700, 1, "Ä«·¹ µ·±î½º"));
-		list.add(new Food(200, 1, "µÎºÎ ¹«Ä§"));
-		list.add(new Food(150, 0.5, "°ø±â¹ä"));
-		list.add(new Food(250, 1, "µÈÀåÂî°³"));
-		list.add(new Food(300, 1, "Á¶±â±¸ÀÌ"));
+		list.add(new Food(700, 1, "ì¹´ë ˆ ëˆê¹ŒìŠ¤"));
+		list.add(new Food(200, 1, "ë‘ë¶€ ë¬´ì¹¨"));
+		list.add(new Food(150, 0.5, "ê³µê¸°ë°¥"));
+		list.add(new Food(250, 1, "ëœì¥ì°Œê°œ"));
+		list.add(new Food(300, 1, "ì¡°ê¸°êµ¬ì´"));
 		temp = new Meal(list);
 
 		calendar.set(Calendar.YEAR, 2017);
@@ -157,10 +157,10 @@ public class Controller {
 		ActionListener actionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (signUp() > 0) {
-					JOptionPane.showMessageDialog(mainFrame, "È¸¿ø°¡ÀÔ ¼º°ø");
+					JOptionPane.showMessageDialog(mainFrame, "íšŒì›ê°€ì… ì„±ê³µ");
 					signUpFrame.setInvisible();
 				} else {
-					JOptionPane.showMessageDialog(mainFrame, "È¸¿ø°¡ÀÔ ½ÇÆĞ");
+					JOptionPane.showMessageDialog(mainFrame, "íšŒì›ê°€ì… ì‹¤íŒ¨");
 				}
 
 			}
@@ -200,10 +200,10 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				loginUser();
 				if (isLoggedIn()) {
-					JOptionPane.showMessageDialog(mainFrame, "·Î±×ÀÎ ¼º°ø");
+					JOptionPane.showMessageDialog(mainFrame, "ë¡œê·¸ì¸ ì„±ê³µ");
 					loginFrame.setInvisible();
 				} else {
-					JOptionPane.showMessageDialog(mainFrame, "·Î±×ÀÎ ½ÇÆĞ");
+					JOptionPane.showMessageDialog(mainFrame, "ë¡œê·¸ì¸ ì‹¤íŒ¨");
 				}
 			}
 
@@ -233,9 +233,9 @@ public class Controller {
 		ActionListener actionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (fileController.saveFile(mealArr)) {
-					JOptionPane.showMessageDialog(mainFrame, "ÀúÀåµÇ¾ú½À´Ï´Ù.");
+					JOptionPane.showMessageDialog(mainFrame, "ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤.");
 				} else {
-					JOptionPane.showMessageDialog(mainFrame, "ÀúÀå ½ÇÆĞ!");
+					JOptionPane.showMessageDialog(mainFrame, "ì €ì¥ ì‹¤íŒ¨!");
 				}
 			}
 		};
@@ -247,9 +247,9 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				mealArr = fileController.readFile();
 				if (mealArr.isEmpty()) {
-					JOptionPane.showMessageDialog(mainFrame, "ºÒ·¯¿À±â ½ÇÆĞ!");
+					JOptionPane.showMessageDialog(mainFrame, "ë¶ˆëŸ¬ì˜¤ê¸° ì‹¤íŒ¨!");
 				} else {
-					JOptionPane.showMessageDialog(mainFrame, "ºÒ·¯¿À±â ¼º°ø!");
+					JOptionPane.showMessageDialog(mainFrame, "ë¶ˆëŸ¬ì˜¤ê¸° ì„±ê³µ!");
 				}
 			}
 		};
@@ -261,12 +261,12 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				if (isLoggedIn()) {
 					if (serverSave() > 0) {
-						JOptionPane.showMessageDialog(mainFrame, "ÀúÀå ¼º°ø");
+						JOptionPane.showMessageDialog(mainFrame, "ì €ì¥ ì„±ê³µ");
 					} else {
-						JOptionPane.showMessageDialog(mainFrame, "ÀúÀå ½ÇÆĞ");
+						JOptionPane.showMessageDialog(mainFrame, "ì €ì¥ ì‹¤íŒ¨");
 					}
 				} else {
-					JOptionPane.showMessageDialog(mainFrame, "·Î±×ÀÎÀÌ µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+					JOptionPane.showMessageDialog(mainFrame, "ë¡œê·¸ì¸ì´ ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 				}
 
 			}
@@ -281,13 +281,13 @@ public class Controller {
 		int mealResult = dao.insertMultipleMeal(conn, mealArr, loggedInUser);
 
 		
-		if (foodResult == 0 || mealResult == 0) {
-			commitOrRollback(conn, 0);
-		} else {
+		if (foodResult == 1 || mealResult == 1) {
 			commitOrRollback(conn, 1);
+		} else {
+			commitOrRollback(conn, 0);
 		}
 		JDBCTemplate.close(conn);
-		return foodResult;
+		return mealResult;
 	}
 
 	private void commitOrRollback(Connection conn, int result) {

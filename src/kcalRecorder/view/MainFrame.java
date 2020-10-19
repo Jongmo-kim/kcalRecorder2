@@ -27,8 +27,8 @@ public class MainFrame extends JFrame {
 		return showMealButton;
 	}
 	private void makeMainButton() {
-		add(addMealButton = new JButton("¸ÔÀº°Í Ãß°¡"));
-		add(showMealButton = new JButton("¸Ô¾ú´ø °Íµé"));
+		add(addMealButton = new JButton("ë¨¹ì€ê²ƒ ì¶”ê°€"));
+		add(showMealButton = new JButton("ë¨¹ì—ˆë˜ ê²ƒë“¤"));
 		
 	}
 

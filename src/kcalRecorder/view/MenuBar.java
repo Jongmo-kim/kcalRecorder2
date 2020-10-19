@@ -19,15 +19,15 @@ public class MenuBar {
 		JMenuBar.add(fileMenu = new JMenu("File"));
 		JMenuBar.add(memberMenu = new JMenu("Member"));
 		
-		fileMenu.add(menuFileSave = new JMenuItem("ÆÄÀÏ ÀúÀå"));
-		fileMenu.add(menuFileLoad = new JMenuItem("ÆÄÀÏ ºÒ·¯¿À±â"));
-		fileMenu.add(menuServerSave = new JMenuItem("¼­¹ö ÀúÀå"));
-		fileMenu.add(menuServerLoad = new JMenuItem("¼­¹ö¿Í µ¿±âÈ­"));
+		fileMenu.add(menuFileSave = new JMenuItem("íŒŒì¼ ì €ì¥"));
+		fileMenu.add(menuFileLoad = new JMenuItem("íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°"));
+		fileMenu.add(menuServerSave = new JMenuItem("ì„œë²„ ì €ì¥"));
+		fileMenu.add(menuServerLoad = new JMenuItem("ì„œë²„ì™€ ë™ê¸°í™”"));
 		fileMenu.addSeparator();
-		fileMenu.add(menuExit = new JMenuItem("³ª°¡±â"));
+		fileMenu.add(menuExit = new JMenuItem("ë‚˜ê°€ê¸°"));
 		
-		memberMenu.add(menuLogin = new JMenuItem("·Î±×ÀÎ"));
-		memberMenu.add(menuSignUp = new JMenuItem("È¸¿ø°¡ÀÔ"));
+		memberMenu.add(menuLogin = new JMenuItem("ë¡œê·¸ì¸"));
+		memberMenu.add(menuSignUp = new JMenuItem("íšŒì›ê°€ì…"));
 	}
 	
 	public JMenuBar getJMenuBar() {

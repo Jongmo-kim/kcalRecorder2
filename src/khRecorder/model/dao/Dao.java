@@ -71,7 +71,7 @@ public class Dao {
 			pstmt.setString(2, pw);
 			pstmt.setString(3, nick);
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -81,13 +81,7 @@ public class Dao {
 		return result;
 	}
 
-	public int serverSave(Connection conn, User loggedInUser, ArrayList<Meal> mealArr) {
-		int result =0;
-		PreparedStatement pstmt = null;
-		
-		return result;
-	}
-	public int insertFood(Connection conn,Food food) {
+	public int insertFood(Connection conn, Food food) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = "insert into food values(food_seq.nextval,?,?)";
@@ -105,18 +99,17 @@ public class Dao {
 	}
 
 	public int insertMultipleFood(Connection conn, ArrayList<Food> foodList) {
-		int result =0;
-		for(Food food : foodList) {
-			if(!isExistFood(conn,food)) {
+		int result = 0;
+		for (Food food : foodList) {
+			if (!isExistFood(conn, food)) {
 				result += insertFood(conn, food);
 			}
 		}
 		return result;
-	}	
-
+	}
 
 	private boolean isExistFood(Connection conn, Food food) {
-		String sql = "select * from food where name = ?";
+		String sql = "select * from food where f_name = ?";
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
@@ -130,70 +123,91 @@ public class Dao {
 		}
 		return result == 0 ? false : true;
 	}
-	public int insertMultipleMeal(Connection conn, ArrayList<Meal> mealArr,User u ) {
+
+	public int insertMultipleMeal(Connection conn, ArrayList<Meal> mealArr, User u) {
 		int result = 0;
 		ArrayList<Food> foodArr = null;
-		for(Meal meal : mealArr) {
+		for (Meal meal : mealArr) {
 			result += insertMeal(conn, meal, u);
-			
+
 			foodArr = meal.getFoodArr();
-			setFoodfNum(conn,foodArr);
-			
-			result = insertFoods(conn, meal,foodArr);
+			setFoodfNum(conn, foodArr);
+
+			result = insertFoods(conn, meal, foodArr);
 		}
 		return result;
 	}
+
 	private int insertFoods(Connection conn, Meal meal, ArrayList<Food> foodArr) {
-		//TODO insertFoods ������ Ȯ���ϱ� 
-		return 0;
-	}
-
-	private void setFoodfNum(Connection conn,ArrayList<Food> foodArr) {
-		int fNum = 0;
-		for(Food food : foodArr) {
-			if(food.getF_no() == -1) {
-				fNum = getfNumByName(conn,food);
-			}
-			food.setF_no(fNum);
-			
+		int result = 0;
+		for (Food food : foodArr) {
+			result += insertFoods(conn, meal, food);
 		}
+		return result;
 	}
 
-	private int getfNumByName(Connection conn, Food food) {
-		String sql  ="select * from food where name = ?";
-		PreparedStatement pstmt  = null;
-		ResultSet rset = null;
-		int fNum = -1 ;
+	private int insertFoods(Connection conn, Meal meal, Food food) {
+		int result = 0;
+//		controller에서 meal마다 하나씩 처리하므로 현재 seq값을 넣는다.
+		String sql = "insert into foods values(meal_seq.currval,?,?)";
+		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, food.getName());
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				fNum = rset.getInt("f_code");
-			}
-			
+
+			pstmt.setInt(1, food.getF_no());
+			pstmt.setDouble(2, food.getSize());
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(pstmt);
 		}
-		
+		return result;
+	}
+
+	private void setFoodfNum(Connection conn, ArrayList<Food> foodArr) {
+		int fNum = 0;
+		for (Food food : foodArr) {
+			fNum = getfNumByName(conn, food);
+			food.setF_no(fNum);
+		}
+	}
+
+	private int getfNumByName(Connection conn, Food food) {
+		String sql = "select * from food where f_name = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int fNum = -1;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, food.getName());
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				fNum = rset.getInt("f_code");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
 		return fNum;
 	}
 
-	public int insertMeal(Connection conn, Meal meal,User u) {
-		int result =0;
+	public int insertMeal(Connection conn, Meal meal, User u) {
+		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = "insert into meal values(meal_seq.nextval,?,?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setDate(1, meal.getSqlDate());
-			pstmt.setInt(2,u.getNo());
+			pstmt.setInt(2, u.getNo());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			 JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(pstmt);
 		}
 		return result;
 	}

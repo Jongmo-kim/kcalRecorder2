@@ -22,8 +22,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import kcalRecorder.model.vo.Food;
-//TODO ¿£ÅÍÅ°¸¦ ´©¸£¸é field¿¡ ÀÔ·ÂµÈ °ªÀÌ ÀÚµ¿À¸·Î ÀúÀåµÇÁö¸¸ focus°¡ 3¹øÂ° À§Ä¡¿¡ µÇ¾îÀÖ´Ù
-// ÀÌ¸¦ 1¹øÂ°·Î ¹Ù²Ù¾îº¸ÀÚ.
+//TODO ì—”í„°í‚¤ë¥¼ ëˆ„ë¥´ë©´ fieldì— ì…ë ¥ëœ ê°’ì´ ìë™ìœ¼ë¡œ ì €ì¥ë˜ì§€ë§Œ focusê°€ 3ë²ˆì§¸ ìœ„ì¹˜ì— ë˜ì–´ìˆë‹¤
+// ì´ë¥¼ 1ë²ˆì§¸ë¡œ ë°”ê¾¸ì–´ë³´ì.
 
 public class AddMealFrame extends JFrame {
 	Stack<Food> addedFood;
@@ -80,17 +80,17 @@ public class AddMealFrame extends JFrame {
 		public addPanel() {
 			setBorder(BorderFactory.createLineBorder(Color.black));
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-			add(new JLabel("¸ÔÀ»°Í Ãß°¡ÇÏ±â"));
+			add(new JLabel("ë¨¹ì„ê²ƒ ì¶”ê°€í•˜ê¸°"));
 			add(nameInputPanel = new nameInputPanel());
 			add(kcalPer100GramInputPanel = new kcalPer100GramInputPanel());
 			add(sizeInputPanel = new sizeInputPanel());
 			JPanel tempPanel = new JPanel();
-			tempPanel.add(addMealFrameAddButton = new addMealFrameAddButton("Ãß°¡"));
+			tempPanel.add(addMealFrameAddButton = new addMealFrameAddButton("ì¶”ê°€"));
 			
-			tempPanel.add(addMealFrameConfirmButton = new addMealFrameConfirmButton("¿Ï·á"));
+			tempPanel.add(addMealFrameConfirmButton = new addMealFrameConfirmButton("ì™„ë£Œ"));
 			add(tempPanel);
-//			add(new confirmButton("¿Ï·á"));
-//			add(new addMealFrameAddButton("Ãß°¡"));
+//			add(new confirmButton("ì™„ë£Œ"));
+//			add(new addMealFrameAddButton("ì¶”ê°€"));
 
 		}
 	}
@@ -106,7 +106,7 @@ public class AddMealFrame extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					addFoodFromTextField();
 					addedFoodWithScrollBar.updateFood();
-					// TODO ÀÌÁ¦ updateµÈ addedFoodWithScrollbar¸¦ ºÆ°Ô²û¸¸ÇÏ¸é´ï
+					// TODO ì´ì œ updateëœ addedFoodWithScrollbarë¥¼ ëµˆê²Œë”ë§Œí•˜ë©´ëŒ
 				}
 
 			};
@@ -136,7 +136,7 @@ public class AddMealFrame extends JFrame {
 
 	public class addedFoodNamePanel extends JPanel {
 		public addedFoodNamePanel(String name) {
-			JLabel indicator = new JLabel("À½½Ä ÀÌ¸§ :");
+			JLabel indicator = new JLabel("ìŒì‹ ì´ë¦„ :");
 			JLabel name_ = new JLabel(name);
 			add(indicator);
 			add(name_);
@@ -145,7 +145,7 @@ public class AddMealFrame extends JFrame {
 
 	public class addedFoodSizePanel extends JPanel {
 		public addedFoodSizePanel(double size) {
-			JLabel indicator = new JLabel("¸î ÀÎºĞ :");
+			JLabel indicator = new JLabel("ëª‡ ì¸ë¶„ :");
 			JLabel size_ = new JLabel(Double.toString(size));
 			add(indicator);
 			add(size_);
@@ -154,7 +154,7 @@ public class AddMealFrame extends JFrame {
 
 	public class addedFoodTotalKcalPanel extends JPanel {
 		public addedFoodTotalKcalPanel(int totalKcal) {
-			JLabel indicator = new JLabel("À½½Ä Ä®·Î¸® :");
+			JLabel indicator = new JLabel("ìŒì‹ ì¹¼ë¡œë¦¬ :");
 			JLabel totalKcal_ = new JLabel(Integer.toString(totalKcal));
 			add(indicator);
 			add(totalKcal_);
@@ -275,7 +275,7 @@ public class AddMealFrame extends JFrame {
 		public addedFoodMainPanel() {
 			setBorder(BorderFactory.createLineBorder(Color.black));
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-			add(new JLabel("* ¸ÔÀº À½½Äµé"));
+			add(new JLabel("* ë¨¹ì€ ìŒì‹ë“¤"));
 			add(addedFoodWithScrollBar = new addedFoodWithScrollBar());
 		}
 	}
