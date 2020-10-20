@@ -41,6 +41,9 @@ public class Meal implements Serializable{
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	public void setDate(java.sql.Date date) {
+		this.date = new Date(date.getTime());
+	}
 	public Food findHighestTotalKcal() {
 		int max = 0;
 		Food tempToReturn = null;

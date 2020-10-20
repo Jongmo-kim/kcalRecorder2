@@ -1,6 +1,7 @@
 package khRecorder.model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -212,9 +213,124 @@ public class Dao {
 		return result;
 	}
 
-	public ArrayList<Meal> getMealList(Connection conn) {
+	public ArrayList<Meal> getMealList(Connection conn, User u) {
+//		데이터 베이스의 경우 foods,food,meal로 나뉘어져있고
+//		자바는 food meal로 나뉘어져 있다
+//		또한 food와 meal의 속성값들도 다르므로 이에대한 처신이 요구된다.
+//		Java food 필수 kcal , amount , name
+//		Java meal 필수 ArrayList<food>, date
+//		이므로
+//		foods에서 m_code를 기준으로 조회하여 저장하면 되겠다.
+//		왜냐하면 foods에선 m_code를 기준으로 분류하여 저장하는데 
+//		여기서 meal마다 어떤 음식이 들어갔는지 알려면 m_code를 기준으로 조회하면 된다.
+//		데이터베이스에서 foods에 amount food에 f_name, kcal이 있으므로 meal까지 들어가 조회할 필요는 없다.
+//		그렇게 ArrayList<Food>를 가져오고 date같은경우는 meal 에 동일하게 있으므로 그대로 넣어주면 되겠다.
+//		그후 m_code마다 해당 위의 내용을 반복하여 그렇게 저장된 meal을 리턴하여 메소드를 종료한다.
+
 		ArrayList<Meal> list = new ArrayList<Meal>();
+		String sql = "select m_code from meal";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		
+		try {
+			Meal tempMeal = null;
+			int m_no = 0;
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				m_no = getMnoFromRset(rset);
+				tempMeal = readMeal(conn,m_no);
+				list.add(tempMeal);
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return list;
 	}
+
+	private int getMnoFromRset(ResultSet rset) {
+		int result=0;
+		try {
+			result = rset.getInt("m_code");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	private Meal readMeal(Connection conn,int m_no) {
+		Meal meal = new Meal();
+		ArrayList<Food> foodList = new ArrayList<Food>();
+		String sql = "select eat_date from meal where m_code = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, m_no);
+			rset = pstmt.executeQuery();
+			meal.setDate(getDateFromMeal(rset));
+			
+			foodList = getFoodList(conn,m_no);
+			meal.setFoodArr(foodList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return meal;
+	}
+
+	private java.sql.Date getDateFromMeal(ResultSet rset) {
+		java.sql.Date date = new java.sql.Date(0);
+		try {
+			if(rset.next()) {
+				date = rset.getDate("eat_date");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return date;
+	}
+
+	private ArrayList<Food> getFoodList(Connection conn, int m_no) {
+		ArrayList<Food> list = new ArrayList<Food>();
+		String sql = "select f_name,kcal,amount from foods \r\n"
+				+ "join food on foods.f_code = food.f_code where m_code = ?\r\n";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, m_no);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Food f = getFoodFromRset(rset);
+				list.add(f);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return list;
+	}
+
+	private Food getFoodFromRset(ResultSet rset) {
+		Food food = new Food();
+		try {
+			food.setName(rset.getString("f_name"));
+			food.setKcalPerOneHundred(rset.getInt("kcal"));
+			food.setSize(rset.getDouble("amount"));
+			food.setTotalKcal();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return food;
+	}
+
 }

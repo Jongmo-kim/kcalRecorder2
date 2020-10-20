@@ -54,7 +54,7 @@ public class Controller {
 		fileController = new FileController(filePath, fileName);
 		mealArr = new ArrayList<Meal>();
 		dao = new Dao();
-		setTestValues();
+		//setTestValues();
 	}
 
 	public void setTestValues() {
@@ -340,13 +340,14 @@ public class Controller {
 	public int serverLoad() {
 		ArrayList<Meal> mealList = null;
 		Connection conn = JDBCTemplate.getConnection();
-		mealList = dao.getMealList(conn);
+		mealList = dao.getMealList(conn,loggedInUser);
 		if(mealList == null) {
 			return 0;
 		} else {
 			mealArr = mealList;
+			return 1;
 		}
-		return 0;
+		
 	}
 
 	public ActionListener actionListenerMenuExit() {

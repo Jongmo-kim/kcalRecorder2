@@ -17,6 +17,11 @@ public class Food implements Serializable{
 		this.f_no = -1;
 	}
 	
+	public Food() {
+		super();
+		this.f_no = -1;
+	}
+
 	public int getF_no() {
 		return f_no;
 	}
@@ -45,6 +50,9 @@ public class Food implements Serializable{
 	}
 	public void setTotalKcal(int totalKcal) {
 		this.totalKcal = totalKcal;
+	}
+	public void setTotalKcal() {
+		this.totalKcal = (int)((double)this.kcalPerOneHundred * this.size);
 	}
 	public String getName() {
 		return name;
