@@ -321,9 +321,32 @@ public class Controller {
 	public ActionListener actionListenerMenuServerLoad() {
 		ActionListener actionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (isLoggedIn()) {
+					if (serverLoad() > 0) {
+						JOptionPane.showMessageDialog(mainFrame, "불러오기 성공");
+					} else {
+						JOptionPane.showMessageDialog(mainFrame, "불러오기 실패");
+					}
+				} else {
+					JOptionPane.showMessageDialog(mainFrame, "로그인이 되지 않았습니다.");
+				}
+
+			
 			}
 		};
 		return actionListener;
+	}
+
+	public int serverLoad() {
+		ArrayList<Meal> mealList = null;
+		Connection conn = JDBCTemplate.getConnection();
+		mealList = dao.getMealList(conn);
+		if(mealList == null) {
+			return 0;
+		} else {
+			mealArr = mealList;
+		}
+		return 0;
 	}
 
 	public ActionListener actionListenerMenuExit() {

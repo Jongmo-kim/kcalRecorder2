@@ -211,4 +211,10 @@ public class Dao {
 		}
 		return result;
 	}
+
+	public ArrayList<Meal> getMealList(Connection conn) {
+		ArrayList<Meal> list = new ArrayList<Meal>();
+		
+		return list;
+	}
 }
