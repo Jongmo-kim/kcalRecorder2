@@ -268,7 +268,6 @@ public class Controller {
 				} else {
 					JOptionPane.showMessageDialog(mainFrame, "로그인이 되지 않았습니다.");
 				}
-
 			}
 		};
 		return actionListener;
@@ -426,6 +425,20 @@ public class Controller {
 	public ActionListener actionListenerConsonantSearchButton() {
 		ActionListener actionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				updateFoodListWithChosung();
+			}
+
+			private void updateFoodListWithChosung() {
+				JTextField textField = ShowMealFrameInstance.getConsonantSearchField();
+				String valueBeIncluded = textField.getText();
+				ArrayList<Meal> list = new ArrayList<Meal>();
+				textField.setText("");
+				for (Meal meal : mealArr) {
+					if (meal.isFoodChosungIncluded(valueBeIncluded)) {
+						list.add(meal);
+					}
+				}
+				ShowMealFrameInstance.updateFoodListTextArea(list);
 			}
 		};
 		return actionListener;

@@ -304,5 +304,8 @@ public class ShowMealFrame extends JFrame{
 	public JTextField getNameSearchTextField() {
 		return nameSearchTextField;
 	}
+	public JTextField getConsonantSearchField() {
+		return consonantSearchTextField;
+	}
 
 }

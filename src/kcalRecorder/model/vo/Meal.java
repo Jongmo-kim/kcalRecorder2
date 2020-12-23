@@ -1,9 +1,13 @@
 package kcalRecorder.model.vo;
 
 import java.io.Serializable;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import autoComplete.trie.HangulType;
+import autoComplete.trie.hangulTrie;
 
 public class Meal implements Serializable{
 	private int m_no;
@@ -81,6 +85,30 @@ public class Meal implements Serializable{
 		calendar.set(calendar.HOUR, hour);
 		calendar.set(calendar.MINUTE, minute);
 		date.setTime(calendar.getTimeInMillis());
+	}
+	public boolean isFoodChosungIncluded(String valueBeIncluded) {
+		for(Food f : foodArr) {
+			char[] arr = Normalizer.normalize(f.getName(), Normalizer.Form.NFD).toCharArray();
+			StringBuilder curStr = new StringBuilder();
+			char[] arr2 = valueBeIncluded.toCharArray();
+			for(int i = 0 ; i < arr.length ; ++i) {
+				if(HangulType.Chosung.isJamo(arr[i])) {
+					curStr.append(arr[i]);
+				}
+			}
+			char[] arr3  = curStr.toString().toCharArray();
+			System.out.println(arr2);
+			System.out.println(arr3);
+			boolean check = true;
+			for(int i = 0 ; i < arr2.length ; ++i) {
+				if(HangulType.Other.setCompatibilityToChosung(arr2[i]) != arr3[i]) {
+					check = false;
+				}
+			}
+			System.out.println(check);
+			return check;
+		}
+		return true;
 	}
 	
 }

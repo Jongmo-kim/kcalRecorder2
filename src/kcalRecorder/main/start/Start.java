@@ -8,5 +8,4 @@ public class Start {
 		Controller f = new Controller();
 		f.main();
 	}
-
 }
